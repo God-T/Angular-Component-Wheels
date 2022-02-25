@@ -1,0 +1,45 @@
+.colour-picker {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 0 10px;
+  align-items: space-between;
+  gap: 10px;
+
+  &--cell {
+    position: relative;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    border-radius: 4px;
+
+    &:hover {
+      filter: brightness(95%);
+    }
+
+    & input:checked + .tick {
+      display: block;
+    }
+  }
+}
+
+input[type="radio"] {
+  visibility: hidden;
+}
+
+.tick {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  transform: scale(0.6);
+  display: none;
+}
+
+/* Be advised that we can not use ":host" since the menu is displayed in a separate overlay element outside of the component's host element */
+::ng-deep .mat-menu-colourPicker {
+  min-height: 0 !important;
+  min-width: 0 !important;
+  width: 130px;
+}

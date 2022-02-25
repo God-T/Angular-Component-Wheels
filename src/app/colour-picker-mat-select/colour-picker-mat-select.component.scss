@@ -1,0 +1,62 @@
+.root {
+  height: 24px;
+}
+
+.colour-picker-palette {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 110px;
+  padding: 6px;
+
+  &__cell {
+    position: relative;
+    cursor: pointer;
+    padding: 0 10px;
+    border-radius: 4px;
+
+    &:hover {
+      filter: brightness(95%);
+    }
+  }
+}
+
+.colour-picker-selected {
+  height: 24px;
+  width: 24px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & mat-icon {
+    height: 23px;
+    transform: scale(1.1);
+  }
+}
+
+.tick {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  transform: scale(0.6);
+}
+
+:host ::ng-deep .mat-select-trigger {
+  height: 24px;
+  width: 24px;
+
+  & .mat-select-arrow-wrapper {
+    display: none;
+  }
+}
+
+/* Be advised that we are not using ":host" because the select is displayed in a separate overlay container outside of the component's host element */
+::ng-deep .cdk-overlay-container .cdk-overlay-pane .colour-picker-panel {
+  min-width: 0 !important;
+  margin-top: 27px;
+  margin-left: -80px;
+}

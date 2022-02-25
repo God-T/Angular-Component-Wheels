@@ -1,0 +1,84 @@
+<div style="width: 200px;">
+<mat-select
+  [placeholder]="!editOptionMode ? 'Priority' : 'Editing...'"
+  [(ngModel)]="selectedItemValue"
+  name="priority"
+  class="priority-select"
+  panelClass="priority-select-panel"
+  (openedChange)="onOpenedChange()"
+  disableOptionCentering
+  disableRipple
+>
+
+  <mat-select-trigger>
+    <div
+      [class.priority-select-indicator]="controlName === 'priority'"
+      [ngStyle]="{'background-color': selectedItem.Colour}"
+    ></div>
+    <!---*overflow hidden text-->
+    <span
+      [class.margin-left]="controlName !== 'priority'"
+      [class]="
+        controlName === 'status' ? 'status-tag status-tag--selected' : ''
+      "
+      [ngStyle]="{'background-color': controlName !== 'priority' ? selectedItem.Colour : ''}"
+
+      >{{ selectedItem.Text }}</span
+    >
+  </mat-select-trigger>
+
+
+  <!--*added stopPropagation to prevent unexpected exiting select menu--->
+  <ng-container *ngIf="!editOptionMode">
+    <mat-option *ngFor="let item of items" [value]="item.Value" [disabled]="editOptionMode" >
+      <div class="priority-option" >
+        <div
+          [class.priority-select-option]="controlName === 'priority'"
+          [ngStyle]="{'background-color': item.Colour}"
+        ></div>
+        <!---*use input?-->
+        <span
+          [class.status-tag]="controlName === 'status'"
+          [ngStyle]="{'background-color': controlName === 'status' ? item.Colour : '' }"
+        >{{ item.Text }}  </span>
+      </div>
+    </mat-option>
+  </ng-container>
+
+ <!--The interface to be included--->
+  <div class="priority-option edit-option-wrapper" *ngFor="let item of items; let i = index" [ngStyle]="{'display': editOptionMode? 'flex' : 'none'}" @fadingAnimation >
+    <div
+      [class.priority-select-option]="controlName === 'priority'"
+      [ngStyle]="{'background-color': item.Colour}"
+    ></div>
+    <span
+      [class.status-tag]="controlName === 'status'"
+      [ngStyle]="{'background-color': controlName === 'status' ? item.Colour : '' }"
+
+      >{{ item.Text }}  </span>
+    <mat-icon *ngIf="item.Value > 3" (click)="onDeleteOption(item.Value)" >close</mat-icon>
+  </div>
+
+  <div *ngIf="editOptionMode" class="new-option-wrapper" @expandingAnimation>
+    <div class="new-option-wrapper__editor" >
+      <div>
+        <app-colour-picker-mat-select (onPickColour) = "newOptionData.Colour = $event"></app-colour-picker-mat-select>
+        <input placeholder="Enter an option" [(ngModel)]="newOptionData.Text">
+      </div>
+      <div>
+        <mat-icon (click)="onCreateNewOption()">check</mat-icon>
+      </div>
+    </div>
+  </div>
+  <mat-divider ></mat-divider>
+  <div class="new-option-wrapper">
+    <span role="button" class="new-option-wrapper__toggle" (click)="onToggleEditMode()" >
+      <mat-icon *ngIf="!editOptionMode">edit</mat-icon> <span *ngIf="!editOptionMode">Edit options</span>
+      <mat-icon *ngIf="editOptionMode">close</mat-icon> <span *ngIf="editOptionMode">Cancel</span>
+    </span>
+  </div>
+  <!----->
+
+</mat-select>
+<div style="margin-bottom: 30px;"></div>
+</div>

@@ -1,0 +1,41 @@
+<div cdkDropListGroup>
+  <div class="example-container">
+    <div
+      cdkDropList
+      [cdkDropListData]="todo"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <ng-container *ngFor="let item of todo" >
+        <div
+        class="example-box"
+        cdkDrag
+        (cdkDragStarted)="onCdkDragStarted(item)"
+        (cdkDragReleased)="onCdkDragReleased()"
+      >
+        {{ item }}
+      </div>
+    </ng-container>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <div
+    cdkDropList
+    [cdkDropListData]="done"
+    class="example-list"
+    (cdkDropListDropped)="drop($event)">
+    <ng-container *ngFor="let item of done" >
+      <div
+      class="example-box"
+      cdkDrag
+      (cdkDragStarted)="onCdkDragStarted(item)"
+      (cdkDragReleased)="onCdkDragReleased()"
+    >
+      {{ item }}
+    </div>
+  </ng-container>
+  </div>
+  </div>
+</div>
+
+<p *ngIf="!draggedItem"> not dragging</p>

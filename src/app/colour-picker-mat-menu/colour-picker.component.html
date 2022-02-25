@@ -1,0 +1,11 @@
+<button mat-button [matMenuTriggerFor]="colourMenu">pick a colour</button>
+<mat-menu #colourMenu="matMenu" xPosition="before" class="mat-menu-colourPicker">
+  <div class="colour-picker">
+    <label class="colour-picker--cell" *ngFor="let colourValue of colourValueList" [ngStyle]="{'background-color': colourValue}">
+      <input type="radio" name="colourPickerCell" [value]="colourValue" [(ngModel)] = "colourPicked">
+      <mat-icon class="tick" [ngStyle]="{'color': getLightnessFromHexValue(colourValue) < 50 ? 'white' : 'black'}">done</mat-icon>
+    </label>
+  </div>
+</mat-menu>
+
+<h3 [ngStyle]="{'color': colourPicked }"> {{colourPicked}}</h3>

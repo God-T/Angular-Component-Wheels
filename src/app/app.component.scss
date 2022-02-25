@@ -1,0 +1,20 @@
+.result {
+  & > div {
+    width: 10px;
+    height: 10px;
+    border-radius: 4px;
+  }
+}
+
+.colour-picker-selected {
+  display: flex;
+  flex-direction: row;
+  height: 20px;
+  gap: 10px;
+
+  & > div {
+    width: 10px;
+    height: 10px;
+    border-radius: 4px;
+  }
+}

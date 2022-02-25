@@ -1,0 +1,15 @@
+
+<div class="root">
+  <mat-select panelClass="colour-picker-panel" [(ngModel)]="colourPicked" (selectionChange)="onSelectionChange($event.value)" disableOptionCentering>
+    <mat-select-trigger [ngStyle]="{'color': colourPicked }">
+        <div class="colour-picker-selected" [ngStyle]="{'background-color': colourPicked}">
+          <mat-icon [ngStyle]="{'color': pickContentColourBasedOnBgColour(colourPicked)}">keyboard_arrow_down</mat-icon>
+        </div>
+    </mat-select-trigger>
+    <div class="colour-picker-palette">
+      <mat-option #matOption *ngFor="let colourValue of colourValueList" class="colour-picker-palette__cell" [value]="colourValue" [ngStyle]="{'background-color': colourValue, 'height':'20px'}">
+          <mat-icon class="tick" [ngStyle]="{'color': pickContentColourBasedOnBgColour(colourValue), 'display': matOption.selected ? 'block' : 'none'}">done</mat-icon>
+      </mat-option>
+    </div>
+  </mat-select>
+</div>
