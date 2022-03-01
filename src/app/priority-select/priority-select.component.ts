@@ -40,9 +40,35 @@ import { Component, OnInit } from '@angular/core';
       //   ]),
       // ]),
     ]),
+    trigger('expandingAnimation2', [
+      state('grow', style({ height: '*' })),
+      state('shrink', style({ height: 0 })),
+      transition('grow <=> shrink', [animate('0.2s ease')]),
+
+      // transition('void => *', [
+      //   group([
+      //     animate('0.2s ease'),
+      //     query('@expandingAnimationHori', [
+      //       style({ opacity: 0, height: 0 }),
+      //       animate('2s ease'),
+      //       style({ opacity: 1, width: '24px' }),
+      //     ]),
+      //     // query('.text', [
+      //     //   animate(
+      //     //     '800ms ease-in-out',
+      //     //     style({
+      //     //       top: '10%',
+      //     //       left: '90%',
+      //     //       transform: 'translate(-170px, -75px)',
+      //     //     })
+      //     //   ),
+      //     // ]),
+      //   ]),
+      // ]),
+    ]),
     trigger('fadingAnimation', [
-      state('*', style({ opacity: 1, height: '48px' })),
-      state('void', style({ opacity: 0, height: 0 })),
+      state('*', style({ opacity: 1 })),
+      state('void', style({ opacity: 0 })),
       transition('void <=> *', [animate('.3s ease')]),
       // transition('void <=> *', [
       //   group([
@@ -86,6 +112,7 @@ export class PrioritySelectComponent {
   expandingAnimationHoriStatus = 'hide';
   currentItemLengthWhenEditing: number = 3; // @discarded
   tempState: string = 'step1'; // @discarded
+  activeScrollbar: boolean = true;
 
   onCreateNewOption() {
     // replace with the actual service   method

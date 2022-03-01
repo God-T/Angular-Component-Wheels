@@ -1,29 +1,37 @@
 <div class="container">
-    <div style="display: flex; align-items: center; justify-content: center; width: 100%; flex-direction: column;">
-      <!-- <button mat-button [matMenuTriggerFor]="colourMenu">pick a colour</button> -->
-      V1-mat-menu ==================================================================================
-        <app-colour-picker></app-colour-picker>
-        V2-mat-select ==================================================================================
-        <div>
-        [PlaceHolder]
-        <div>
-          <app-colour-picker-mat-select (onPickColour)="colourPicked = $event">
-
-              <div class="colour-picker-selected">
-                <div [ngStyle]="{'background-color': colourPicked}"></div>{{fieldName}}
-              </div>
-
-          </app-colour-picker-mat-select>
-        </div>
-        [PlaceHolder]
-      </div>
-      V-final ==================================================================================
+  <div
+    style="
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      flex-direction: column;
+    "
+  >
+    <!-- <button mat-button [matMenuTriggerFor]="colourMenu">pick a colour</button> -->
+    V1-mat-menu
+    ==================================================================================
+    <app-colour-picker></app-colour-picker>
+    V2-mat-select
+    ==================================================================================
+    <div>
+      [PlaceHolder]
       <div>
-        <app-priority-select></app-priority-select>
+        <app-colour-picker-mat-select (onPickColour)="colourPicked = $event">
+          <div class="colour-picker-selected">
+            <div [ngStyle]="{ 'background-color': colourPicked }"></div>
+            {{ fieldName }}
+          </div>
+        </app-colour-picker-mat-select>
       </div>
-      ==================================================================================
-      <app-drag-drop></app-drag-drop>
+      [PlaceHolder]
     </div>
-
+    V-final
+    ==================================================================================
+    <div>
+      <app-priority-select></app-priority-select>
+    </div>
+    ==================================================================================
+    <!-- <app-drag-drop></app-drag-drop> -->
+  </div>
 </div>
-
