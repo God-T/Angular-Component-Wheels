@@ -1,0 +1,33 @@
+<div class="root">
+  <mat-select
+    [placeholder]="!editOptionMode ? 'Priority' : 'Editing...'"
+    [(ngModel)]="selectedItemValue"
+    name="priority"
+    class="priority-select"
+    panelClass="priority-select-panel"
+    (openedChange)="onOpenedChange()"
+    disableOptionCentering
+    disableRipple
+  >
+    <mat-select-trigger>
+      <div
+        [class.priority-select-indicator]="controlName === 'priority'"
+        [ngStyle]="{ 'background-color': selectedItem.Colour }"
+      ></div>
+      <!---*overflow hidden text-->
+      <span
+        [class.margin-left]="controlName !== 'priority'"
+        [class]="
+          controlName === 'status' ? 'status-tag status-tag--selected' : ''
+        "
+        [ngStyle]="{
+          'background-color':
+            controlName !== 'priority' ? selectedItem.Colour : ''
+        }"
+        >{{ selectedItem.Text }}</span
+      >
+    </mat-select-trigger>
+
+    <!----->
+  </mat-select>
+</div>

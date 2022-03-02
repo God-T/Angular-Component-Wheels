@@ -60,6 +60,8 @@
     <div
       class="option-list"
       [ngStyle]="{ 'overflow-y': activeScrollbar ? 'overlay' : 'hidden' }"
+      appAutoScrollToBottom
+      [autoScrollToBottomTriggered]="autoScrollToBottomTriggered"
     >
       <div
         class="option-wrapper option-wrapper--deleteable"
@@ -102,7 +104,6 @@
       <div
         *ngIf="editOptionMode"
         class="create-new-wrapper"
-        @expandingAnimation
         style="overflow: hidden"
       >
         <div
@@ -115,6 +116,9 @@
             placeholder="Enter an option"
             [(ngModel)]="newOptionData.Text"
             (keydown)="$event.stopPropagation()"
+            appAutoFocusInputField
+            [autoFocusInputFieldTriggered]="autoFocusInputFieldTriggered"
+            (onDisableTrigger)="autoFocusInputFieldTriggered = $event"
           />
           <mat-icon (click)="onCreateNewOption()">check</mat-icon>
         </div>
@@ -136,5 +140,4 @@
     </div>
     <!----->
   </mat-select>
-  <div style="margin-bottom: 30px"></div>
 </div>

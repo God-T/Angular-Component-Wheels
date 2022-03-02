@@ -11,35 +11,40 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ColourPickerMatSelectComponent } from './colour-picker-mat-select/colour-picker-mat-select.component';
 import { ColourPickerComponent } from './colour-picker-overlay/colour-picker.component';
-import { PrioritySelectComponent } from './priority-select/priority-select.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { DragDropComponent } from './drag-drop/drag-drop/drag-drop.component';
-import { DropDownOptionEditComponent } from './drop-down-option-edit/drop-down-option-edit.component';
 import { AutoScrollToBottomDirective } from './directives/auto-scroll-to-bottom.directive';
+import { AutoFocusInputFieldDirective } from './directives/auto-focus-input-field.directive';
+import { PrioritySelectComponent } from './priority-select--pure/priority-select.component';
+import { EditableDropDownListComponent } from './editable-drop-down-list/editable-drop-down-list.component';
 
 const baseComponents = [
-  AppComponent,
   ColourPickerComponent,
   ColourPickerMatSelectComponent,
   PrioritySelectComponent,
   DragDropComponent,
-  DropDownOptionEditComponent,
 ];
-const baseDirectives = [AutoScrollToBottomDirective];
+
+const baseDirectives = [
+  AutoScrollToBottomDirective,
+  AutoFocusInputFieldDirective,
+];
+
+const baseModule = [BrowserModule, FormsModule];
+
+const UIModule = [
+  BrowserAnimationsModule,
+  MatMenuModule,
+  MatSelectModule,
+  MatIconModule,
+  MatGridListModule,
+  MatDividerModule,
+  DragDropModule,
+];
 
 @NgModule({
-  declarations: [...baseComponents, ...baseDirectives],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatMenuModule,
-    MatSelectModule,
-    MatIconModule,
-    MatGridListModule,
-    MatDividerModule,
-    DragDropModule,
-  ],
+  declarations: [AppComponent, ...baseComponents, ...baseDirectives, EditableDropDownListComponent],
+  imports: [...baseModule, ...UIModule],
   providers: [],
   bootstrap: [AppComponent],
 })

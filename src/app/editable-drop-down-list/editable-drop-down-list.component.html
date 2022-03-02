@@ -1,0 +1,105 @@
+<!--*added stopPropagation to prevent unexpected exiting select menu--->
+<div *ngIf="!editMode" class="option-list">
+  <mat-option
+    *ngFor="let item of list"
+    [value]="item.Value"
+    [disabled]="editMode"
+  >
+    <div class="option-wrapper">
+      <span>
+        <div
+          [class.priority-select-option]="controlName === 'priority'"
+          [ngStyle]="{ 'background-color': item.Colour }"
+        ></div>
+      </span>
+      <!---*use input?-->
+      <span
+        [class.status-tag]="controlName === 'status'"
+        [ngStyle]="{
+          'background-color': controlName === 'status' ? item.Colour : ''
+        }"
+        >{{ item.Text }}
+      </span>
+    </div>
+  </mat-option>
+</div>
+
+<!--The interface to be included--->
+<div
+  class="option-list"
+  [ngStyle]="{ 'overflow-y': activeScrollbar ? 'overlay' : 'hidden' }"
+  appAutoScrollToBottom
+  [autoScrollToBottomTriggered]="autoScrollToBottomTriggered"
+  (onDisableTrigger)="autoScrollToBottomTriggered = $event"
+>
+  <div
+    class="option-wrapper option-wrapper--deleteable"
+    *ngFor="let item of list; let i = index"
+    [ngStyle]="{ display: editMode ? 'flex' : 'none' }"
+  >
+    <span>
+      <div
+        [class.priority-select-option]="controlName === 'priority'"
+        [ngStyle]="{ 'background-color': item.Colour }"
+      ></div>
+    </span>
+    <span
+      [class.status-tag]="controlName === 'status'"
+      [ngStyle]="{
+        'background-color': controlName === 'status' ? item.Colour : ''
+      }"
+      >{{ item.Text }}
+    </span>
+    <mat-icon
+      class="closeSth"
+      *ngIf="item.Value > 3"
+      (click)="onDeleteOption(item.Value)"
+      >close</mat-icon
+    >
+  </div>
+  <!-- <div
+    class="option-wrapper option-wrapper--deleteable create-new-wrapper__editor"
+  >
+    <app-colour-picker-mat-select
+      (onPickColour)="newOptionData.Colour = $event"
+    ></app-colour-picker-mat-select>
+    <input
+      placeholder="Enter an option"
+      [(ngModel)]="newOptionData.Text"
+      (keydown)="$event.stopPropagation()"
+    />
+    <mat-icon (click)="onCreateNewOption()">check</mat-icon>
+  </div> -->
+  <div *ngIf="editMode" class="create-new-wrapper" style="overflow: hidden">
+    <div
+      class="option-wrapper option-wrapper--deleteable create-new-wrapper__editor"
+    >
+      <app-colour-picker-mat-select
+        (onPickColour)="newOptionData.Colour = $event"
+      ></app-colour-picker-mat-select>
+      <input
+        placeholder="Enter an option"
+        [(ngModel)]="newOptionData.Text"
+        (keydown)="$event.stopPropagation()"
+        appAutoFocusInputField
+        [autoFocusInputFieldTriggered]="autoFocusInputFieldTriggered"
+        (onDisableTrigger)="autoFocusInputFieldTriggered = $event"
+      />
+      <mat-icon (click)="onCreateNewOption()">check</mat-icon>
+    </div>
+  </div>
+</div>
+
+<mat-divider></mat-divider>
+<div class="create-new-wrapper">
+  <span
+    role="button"
+    class="option-wrapper create-new-wrapper__toggle"
+    (click)="onToggleEditMode()"
+  >
+    <mat-icon *ngIf="!editMode">edit</mat-icon>
+    <span *ngIf="!editMode">Edit options</span>
+    <mat-icon *ngIf="editMode">close</mat-icon>
+    <span *ngIf="editMode">Cancel</span>
+  </span>
+</div>

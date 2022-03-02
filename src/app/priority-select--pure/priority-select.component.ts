@@ -152,7 +152,6 @@ export class PrioritySelectComponent {
     } else {
       this.editOptionMode = true;
       this.expandingAnimationHoriStatus = 'show';
-
       this.autoFocusInputFieldTriggered = true;
       this.autoScrollToBottomTriggered = true;
     }

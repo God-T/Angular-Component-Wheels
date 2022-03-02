@@ -9,10 +9,10 @@ import {
 import { ChangeDetectorRef } from '@angular/core';
 
 @Directive({
-  selector: '[appAutoScrollToBottom]',
+  selector: '[appAutoFocusInputField]',
 })
-export class AutoScrollToBottomDirective implements AfterViewChecked {
-  @Input('autoScrollToBottomTriggered') triggered: boolean;
+export class AutoFocusInputFieldDirective implements AfterViewChecked {
+  @Input('autoFocusInputFieldTriggered') triggered: boolean;
   @Output('onDisableTrigger') emitter: EventEmitter<boolean> =
     new EventEmitter<boolean>();
 
@@ -20,7 +20,7 @@ export class AutoScrollToBottomDirective implements AfterViewChecked {
 
   ngAfterViewChecked() {
     if (this.triggered) {
-      this.el.nativeElement.scrollTop = this.el.nativeElement.scrollHeight;
+      this.el.nativeElement.focus();
       this.emitter.emit(false);
       this.cdRef.detectChanges(); // work around for ExpressionChangedAfterItHasBeenCheckedError
     }
