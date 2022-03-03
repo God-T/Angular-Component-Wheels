@@ -16,13 +16,14 @@ import { DragDropComponent } from './drag-drop/drag-drop/drag-drop.component';
 import { AutoScrollToBottomDirective } from './directives/auto-scroll-to-bottom.directive';
 import { AutoFocusInputFieldDirective } from './directives/auto-focus-input-field.directive';
 import { PrioritySelectComponent } from './priority-select--pure/priority-select.component';
-import { EditableDropDownListComponent } from './editable-drop-down-list/editable-drop-down-list.component';
+import { DropDownListEditComponent } from './drop-down-list-edit/drop-down-list-edit.component';
 
 const baseComponents = [
   ColourPickerComponent,
   ColourPickerMatSelectComponent,
   PrioritySelectComponent,
   DragDropComponent,
+  DropDownListEditComponent,
 ];
 
 const baseDirectives = [
@@ -43,7 +44,7 @@ const UIModule = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ...baseComponents, ...baseDirectives, EditableDropDownListComponent],
+  declarations: [AppComponent, ...baseComponents, ...baseDirectives],
   imports: [...baseModule, ...UIModule],
   providers: [],
   bootstrap: [AppComponent],

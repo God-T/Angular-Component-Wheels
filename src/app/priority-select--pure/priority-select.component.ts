@@ -8,7 +8,8 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { SelectListItemWithColour } from '../models/select-list-item';
 
 @Component({
   selector: 'app-priority-select',
@@ -97,74 +98,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrioritySelectComponent {
   // *add colour attribute
+  editMode: boolean;
 
-  selectedItemValue = 1;
-  items = [
+  selectedItemValue: number = 1;
+
+  optionList: SelectListItemWithColour[] = [
     { Colour: '#fac14e', Value: 1, Text: 'Low' },
     { Colour: '#6470ed', Value: 2, Text: 'Medium' },
     { Colour: '#ed4345', Value: 3, Text: 'High' },
   ];
-  controlName = 'priority';
+  controlName: string = 'priority';
 
   // codes need to be included
-  newOptionData = { Colour: '', Text: '' };
-  editOptionMode: boolean = false; // hidden by default
-  expandingAnimationHoriStatus = 'hide';
-  currentItemLengthWhenEditing: number = 3; // @discarded
-  tempState: string = 'step1'; // @discarded
-  activeScrollbar: boolean = true;
-  autoFocusInputFieldTriggered: boolean = false;
-  autoScrollToBottomTriggered: boolean = false;
-
-  onCreateNewOption() {
-    // replace with the actual service method
-    if (!!this.newOptionData.Colour && !!this.newOptionData.Text) {
-      this.items.push({
-        Colour: this.newOptionData.Colour,
-        Value:
-          Math.max.apply(
-            Math,
-            this.items.map((item) => {
-              return item.Value;
-            })
-          ) + 1,
-        Text: this.newOptionData.Text,
-      });
-      this.newOptionData.Text = '';
-
-      this.autoFocusInputFieldTriggered = true;
-      this.autoScrollToBottomTriggered = true;
-    }
-  }
+  expandingAnimationHoriStatus: string = 'hide';
 
   onOpenedChange() {
-    this.resetEditOptionStatus();
-    this.items = this.items.map((item) => Object.assign({}, item)); // Do deep clone to force DOM rerender to work around the void animation status set by mat-select-panel
+    this.disableEditMode();
+    // TODO emit to child
+    this.optionList = this.optionList.map((item) => Object.assign({}, item)); // Do deep clone to force DOM rerender to work around the void animation status set by mat-select-panel
   }
 
-  onDeleteOption(optionValue: number) {
-    this.items = this.items.filter(({ Value }) => optionValue !== Value);
-  }
-
-  onToggleEditMode() {
-    if (this.editOptionMode) {
-      this.resetEditOptionStatus();
-    } else {
-      this.editOptionMode = true;
-      this.expandingAnimationHoriStatus = 'show';
-      this.autoFocusInputFieldTriggered = true;
-      this.autoScrollToBottomTriggered = true;
-    }
-  }
-
-  resetEditOptionStatus() {
-    this.editOptionMode = false;
-    this.newOptionData = { Colour: '', Text: '' };
+  disableEditMode() {
+    this.editMode = false;
   }
 
   get selectedItem() {
     const value = this.selectedItemValue;
-    const selectedItem = this.items.find((item) => item.Value === value);
+    const selectedItem = this.optionList.find((item) => item.Value === value);
     return {
       Colour: selectedItem?.Colour,
       Value: selectedItem?.Value,

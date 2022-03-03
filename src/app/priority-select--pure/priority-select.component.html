@@ -1,6 +1,6 @@
 <div class="root">
   <mat-select
-    [placeholder]="!editOptionMode ? 'Priority' : 'Editing...'"
+    [placeholder]="!editMode ? 'Priority' : 'Editing...'"
     [(ngModel)]="selectedItemValue"
     name="priority"
     class="priority-select"
@@ -27,6 +27,36 @@
         >{{ selectedItem.Text }}</span
       >
     </mat-select-trigger>
+
+    <div *ngIf="!editMode" class="option-list">
+      <mat-option
+        *ngFor="let item of optionList"
+        [value]="item.Value"
+        [disabled]="editMode"
+      >
+        <div class="option-wrapper">
+          <span>
+            <div
+              [class.priority-select-option]="controlName === 'priority'"
+              [ngStyle]="{ 'background-color': item.Colour }"
+            ></div>
+          </span>
+          <!---*use input?-->
+          <span
+            [class.status-tag]="controlName === 'status'"
+            [ngStyle]="{
+              'background-color': controlName === 'status' ? item.Colour : ''
+            }"
+            >{{ item.Text }}
+          </span>
+        </div>
+      </mat-option>
+    </div>
+
+    <app-drop-down-list-edit
+      [(editMode)]="editMode"
+      [(optionList)]="optionList"
+    ></app-drop-down-list-edit>
 
     <!----->
   </mat-select>
