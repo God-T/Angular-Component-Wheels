@@ -118,6 +118,12 @@ export class PrioritySelectComponent {
     this.optionList = this.optionList.map((item) => Object.assign({}, item)); // Do deep clone to force DOM rerender to work around the void animation status set by mat-select-panel
   }
 
+  onDeleteOption(optionValue: number) {
+    this.optionList = this.optionList.filter(
+      ({ Value }) => optionValue !== Value
+    );
+  }
+
   disableEditMode() {
     this.editMode = false;
   }

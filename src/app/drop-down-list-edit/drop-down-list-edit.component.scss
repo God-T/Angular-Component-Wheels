@@ -1,10 +1,11 @@
 @use "../styles/scrollbar.scss";
 
-$base-panel-width: 230px;
-$base-option-height: 48px;
-$base-content-line-height: calc(#{$base-option-height} - 23px);
-$base-option-padding-inline: 10px;
-$base-option-indicator-width: 24px;
+$panel-width: 230px;
+$option-height: 48px;
+$content-line-height: calc(#{$option-height} - 23px);
+$option-padding-inline: 10px;
+$option-indicator-width: 24px;
+$option-flex-gap: 10px;
 
 @mixin centered-hori-and-vert {
   display: flex;
@@ -12,66 +13,43 @@ $base-option-indicator-width: 24px;
   justify-content: center;
 }
 
-.root {
-  width: $base-panel-width;
-  height: $base-content-line-height;
-  line-height: $base-content-line-height;
-}
-
-// maybe replace all flex with fxLayout?
-.colour-picker-selected {
-  display: flex;
-  flex-direction: row;
-  height: 20px;
-  gap: 10px;
-
-  & > div {
-    width: 10px;
-    height: 10px;
-    border-radius: 4px;
-  }
-}
-
 .option-list {
   max-height: 288px;
   overflow-x: hidden;
+  overflow-y: overlay;
 }
 
-.option-wrapper {
+:host ::ng-deep .option-wrapper {
   @include centered-hori-and-vert;
-  gap: 10px;
+  height: $option-height;
+  gap: $option-flex-gap;
+  padding-inline: $option-padding-inline;
+
   & > :nth-child(1) {
     @include centered-hori-and-vert;
-    flex: 0 0 $base-option-indicator-width;
+    flex: 0 0 $option-indicator-width;
   }
   & > :nth-child(2) {
-    flex: 2 0 1px;
+    flex: 1 0 1px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     line-height: 100%;
   }
+  & > :nth-child(3) {
+    flex: 0 0 $option-indicator-width;
+    color: gray;
+    cursor: pointer;
+    margin-right: 0;
 
-  &--deleteable {
-    padding-inline: $base-option-padding-inline;
-    height: $base-option-height;
-    // width: calc($base-panel-width - 32px);
-    margin: 0;
-
-    & > :nth-child(3) {
-      flex: 0 0 $base-option-indicator-width;
-      color: gray;
-      cursor: pointer;
-
-      &:hover {
-        color: red;
-      }
+    &:hover {
+      color: red;
     }
   }
 }
 
 .create-new-wrapper {
-  height: $base-option-height;
+  height: $option-height;
   display: flex;
   align-items: center;
   width: 100%;
@@ -79,43 +57,51 @@ $base-option-indicator-width: 24px;
 
   &__editor {
     width: 100%;
-    padding-inline: $base-option-padding-inline
-      calc(#{$base-option-padding-inline} - 1px);
+    padding-inline: $option-padding-inline calc(#{$option-padding-inline} - 1px);
+    gap: calc(#{$option-flex-gap}-2px);
 
-    & > :nth-child(2) {
-      width: 120px;
-      height: $base-content-line-height;
-      line-height: $base-content-line-height;
-      border: none;
-      padding: 0px;
-      font-size: 16px;
-      color: rgba(0, 0, 0, 0.87);
-      border-bottom: 2px solid transparent;
-      &:hover,
-      &:focus {
-        outline: none;
-        border-color: gray;
+    &:hover {
+      background-color: #f5f5f5;
+
+      & :nth-child(2) {
+        border-color: rgb(211, 211, 211);
       }
     }
 
-    & > :last-child {
+    :nth-child(2) {
+      width: 120px;
+      height: $content-line-height;
+      line-height: $content-line-height;
+      padding-inline: 3px;
+      font-size: 16px;
+      color: rgba(0, 0, 0, 0.87);
+      border: transparent 1px solid;
+      border-radius: 4px;
+      outline: none;
+
+      &:focus,
+      &:hover {
+        border-color: rgba(0, 0, 0, 0.678);
+      }
+    }
+    :last-child {
+      @include centered-hori-and-vert;
       color: gray;
       cursor: pointer;
+      height: 100%;
 
       &:hover {
         color: green;
       }
     }
-    //to be replaced by Jerry's smart input component
   }
-
   &__toggle {
     display: flex;
     flex-direction: row;
     align-items: center;
     cursor: pointer;
     color: rgba(0, 0, 0, 0.87);
-    padding-inline: $base-option-padding-inline;
+    padding-inline: $option-padding-inline;
     width: 100%;
     height: 100%;
 
@@ -128,103 +114,3 @@ $base-option-indicator-width: 24px;
     }
   }
 }
-
-.mat-option.mat-option-disabled {
-  color: black;
-}
-
-::ng-deep .cdk-overlay-container .cdk-overlay-pane .priority-select-panel {
-  min-width: 0 !important;
-  min-height: 0 !important;
-  max-width: none; // change if need
-  max-height: none; // change if need
-  width: $base-panel-width;
-  margin-top: 35px;
-  margin-left: 8px;
-
-  // [[[[[ use our scrollbar design, * need to make it work in our code base
-  ::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-  }
-  ::-webkit-scrollbar-track {
-    background-color: rgb(255, 255, 255);
-  }
-  ::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 2px rgba(224, 223, 223, 0.699);
-    border-radius: 5px;
-    background: rgb(167 162 162 / 70%);
-  }
-
-  & .mat-option {
-    padding-inline: 10px;
-  }
-  // ]]]]]]
-}
-
-/* to be deleted*/
-// below style were copied from code base
-// $highPriorityColor: #ed4345;
-// $mediumPriorityColor: #6470ed;
-// $lowPriorityColor: #fac14e;
-
-// .priority-select-option {
-//   background-color: var(--bg-colour-temp);
-
-//   &::before {
-//     content: "";
-//     width: 10px;
-//     height: 10px;
-//     background-color: black;
-//     display: inline-block;
-//     border-radius: 50%;
-//     margin-right: 10px;
-//   }
-// }
-
-.priority-select-option {
-  width: 10px;
-  height: 10px;
-  background-color: transparent;
-  display: inline-block;
-  border-radius: 50%;
-  // margin-right: 10px;
-}
-
-// .low-priority-option {
-//   background-color: $lowPriorityColor;
-// }
-
-// .medium-priority-option {
-//   background-color: $mediumPriorityColor;
-// }
-
-// .high-priority-option {
-//   background-color: $highPriorityColor;
-// }
-
-// dynamic setting colours
-// .low-option::before {
-//   background-color: $lowPriorityColor;
-// }
-
-// .medium-option::before {
-//   background-color: $mediumPriorityColor;
-// }
-
-// .high-option::before {
-//   background-color: $highPriorityColor;
-// }
-
-.priority-select-indicator {
-  content: "";
-  display: inline-block;
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: transparent;
-  margin-left: 7px;
-  margin-right: 9px;
-  margin-top: 2px;
-}
-/**/

@@ -1,52 +1,29 @@
-<!--*added stopPropagation to prevent unexpected exiting select menu--->
-
-<!--The interface to be included--->
 <div
   class="option-list"
   appAutoScrollToBottom
   [autoScrollToBottomTriggered]="autoScrollToBottomTriggered"
   (onDisableTrigger)="autoScrollToBottomTriggered = $event"
 >
-  <div
-    class="option-wrapper option-wrapper--deleteable"
-    *ngFor="let item of optionList; let i = index"
-    [ngStyle]="{ display: editMode ? 'flex' : 'none' }"
-  >
-    <span>
-      <div
-        [class.priority-select-option]="controlName === 'priority'"
-        [ngStyle]="{ 'background-color': item.Colour }"
-      ></div>
-    </span>
-    <span
-      [class.status-tag]="controlName === 'status'"
-      [ngStyle]="{
-        'background-color': controlName === 'status' ? item.Colour : ''
-      }"
-      >{{ item.Text }}
-    </span>
-    <mat-icon
-      class="closeSth"
-      *ngIf="item.Value > 3"
-      (click)="onDeleteOption(item.Value)"
-      >close</mat-icon
-    >
-  </div>
+  <ng-content></ng-content>
 
   <div *ngIf="editMode" class="create-new-wrapper">
     <div
-      class="option-wrapper option-wrapper--deleteable create-new-wrapper__editor"
+      [ngStyle]="{ 'background-color': inputFocused ? 'white' : '' }"
+      class="option-wrapper create-new-wrapper__editor"
     >
       <app-colour-picker-mat-select
         (onPickColour)="newOptionData.Colour = $event"
+        [(panelOpened)]="panelOpened"
       ></app-colour-picker-mat-select>
       <input
         placeholder="Enter an option"
         [(ngModel)]="newOptionData.Text"
-        (keydown)="$event.stopPropagation()"
-        appAutoFocusInputField
         [autoFocusInputFieldTriggered]="autoFocusInputFieldTriggered"
         (onDisableTrigger)="autoFocusInputFieldTriggered = $event"
+        (keydown)="$event.stopPropagation()"
+        (focus)="inputFocused = true"
+        (focusout)="inputFocused = false"
+        appAutoFocusInputField
       />
       <mat-icon (click)="onCreateNewOption()">check</mat-icon>
     </div>
@@ -54,6 +31,7 @@
 </div>
 
 <mat-divider></mat-divider>
+
 <div class="create-new-wrapper">
   <span
     role="button"

@@ -3,8 +3,6 @@
 $panel-width: 230px;
 $option-height: 48px;
 $content-line-height: calc(#{$option-height} - 23px);
-$option-inline-padding: 10px;
-$base-option-indicator-width: 24px;
 
 @mixin centered-hori-and-vert {
   display: flex;
@@ -17,117 +15,6 @@ $base-option-indicator-width: 24px;
   line-height: $content-line-height;
 }
 
-// maybe replace all flex with fxLayout?
-.colour-picker-selected {
-  display: flex;
-  flex-direction: row;
-  height: 20px;
-  gap: 10px;
-
-  & > div {
-    width: 10px;
-    height: 10px;
-    border-radius: 4px;
-  }
-}
-
-.option-list {
-  max-height: 288px;
-  overflow-y: overlay;
-  overflow-x: hidden;
-}
-
-.option-wrapper {
-  @include centered-hori-and-vert;
-  gap: 10px;
-  & > :nth-child(1) {
-    @include centered-hori-and-vert;
-    flex: 0 0 $base-option-indicator-width;
-  }
-  & > :nth-child(2) {
-    flex: 2 0 1px;
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    line-height: 100%;
-  }
-
-  &--deleteable {
-    padding-inline: $option-inline-padding;
-    height: $option-height;
-    // width: calc($panel-width - 32px);
-    margin: 0;
-
-    & > :nth-child(3) {
-      flex: 0 0 $base-option-indicator-width;
-      color: gray;
-      cursor: pointer;
-
-      &:hover {
-        color: red;
-      }
-    }
-  }
-}
-
-.create-new-wrapper {
-  height: $option-height;
-  display: flex;
-  align-items: center;
-  width: $panel-width;
-  margin: 0;
-
-  &__editor {
-    width: 100%;
-    padding-inline: $option-inline-padding calc($option-inline-padding - 1px);
-
-    & > :nth-child(2) {
-      width: 120px;
-      height: $content-line-height;
-      line-height: $content-line-height;
-      border: none;
-      padding: 0px;
-      font-size: 16px;
-      color: rgba(0, 0, 0, 0.87);
-      border-bottom: 2px solid transparent;
-      &:hover,
-      &:focus {
-        outline: none;
-        border-color: gray;
-      }
-    }
-
-    & > :last-child {
-      color: gray;
-      cursor: pointer;
-
-      &:hover {
-        color: green;
-      }
-    }
-    //to be replaced by Jerry's smart input component
-  }
-
-  &__toggle {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    cursor: pointer;
-    color: rgba(0, 0, 0, 0.87);
-    padding-inline: $option-inline-padding;
-    width: 100%;
-    height: 100%;
-
-    &:hover {
-      background-color: #f5f5f5;
-    }
-    & > mat-icon {
-      transform: scale(0.9);
-      color: rgba(0, 0, 0, 0.7);
-    }
-  }
-}
-
 .mat-option.mat-option-disabled {
   color: black;
 }
@@ -135,8 +22,8 @@ $base-option-indicator-width: 24px;
 ::ng-deep .cdk-overlay-container .cdk-overlay-pane .priority-select-panel {
   min-width: 0 !important;
   min-height: 0 !important;
-  max-width: none; // change if need
-  max-height: 1000px; // change if need
+  max-width: none;
+  max-height: none;
   overflow-x: hidden;
   width: $panel-width;
   margin-top: 35px;
@@ -155,67 +42,20 @@ $base-option-indicator-width: 24px;
     border-radius: 5px;
     background: rgb(167 162 162 / 70%);
   }
-
   & .mat-option {
-    padding-inline: 10px;
+    padding-inline: 0px;
   }
   // ]]]]]]
 }
 
-/* to be deleted*/
-// below style were copied from code base
-// $highPriorityColor: #ed4345;
-// $mediumPriorityColor: #6470ed;
-// $lowPriorityColor: #fac14e;
-
-// .priority-select-option {
-//   background-color: var(--bg-colour-temp);
-
-//   &::before {
-//     content: "";
-//     width: 10px;
-//     height: 10px;
-//     background-color: black;
-//     display: inline-block;
-//     border-radius: 50%;
-//     margin-right: 10px;
-//   }
-// }
-
+//////////////// cv-ed code ////////////////
 .priority-select-option {
   width: 10px;
   height: 10px;
   background-color: transparent;
   display: inline-block;
   border-radius: 50%;
-  // margin-right: 10px;
 }
-
-// .low-priority-option {
-//   background-color: $lowPriorityColor;
-// }
-
-// .medium-priority-option {
-//   background-color: $mediumPriorityColor;
-// }
-
-// .high-priority-option {
-//   background-color: $highPriorityColor;
-// }
-
-// dynamic setting colours
-// .low-option::before {
-//   background-color: $lowPriorityColor;
-// }
-
-// .medium-option::before {
-//   background-color: $mediumPriorityColor;
-// }
-
-// .high-option::before {
-//   background-color: $highPriorityColor;
-// }
-
 .priority-select-indicator {
   content: "";
   display: inline-block;
@@ -227,4 +67,4 @@ $base-option-indicator-width: 24px;
   margin-right: 9px;
   margin-top: 2px;
 }
-/**/
+//////////////// cv-ed code ////////////////

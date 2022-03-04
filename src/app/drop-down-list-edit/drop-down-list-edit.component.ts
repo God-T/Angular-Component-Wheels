@@ -24,6 +24,7 @@ export class DropDownListEditComponent {
   _optionList: SelectListItemWithColour[] = [];
 
   activeScrollbar: boolean = true;
+  inputFocused: boolean = false;
   controlName = 'priority';
   autoFocusInputFieldTriggered: boolean = false;
   autoScrollToBottomTriggered: boolean = false;
@@ -34,6 +35,7 @@ export class DropDownListEditComponent {
   };
 
   set editMode(value: boolean) {
+    console.log('emit', value);
     this._editMode = value;
     this.editModeChange.emit(this._editMode);
   }
@@ -77,11 +79,5 @@ export class DropDownListEditComponent {
       this.autoFocusInputFieldTriggered = true;
       this.autoScrollToBottomTriggered = true;
     }
-  }
-
-  onDeleteOption(optionValue: number) {
-    this._optionList = this._optionList.filter(
-      ({ Value }) => optionValue !== Value
-    );
   }
 }
