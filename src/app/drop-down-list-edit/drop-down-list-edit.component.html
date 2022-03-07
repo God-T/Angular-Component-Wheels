@@ -1,19 +1,21 @@
 <div
   class="option-list"
-  appAutoScrollToBottom
   [autoScrollToBottomTriggered]="autoScrollToBottomTriggered"
   (onDisableTrigger)="autoScrollToBottomTriggered = $event"
+  appAutoScrollToBottom
 >
   <ng-content></ng-content>
 
   <div *ngIf="editMode" class="create-new-wrapper">
     <div
-      [ngStyle]="{ 'background-color': inputFocused ? 'white' : '' }"
-      class="option-wrapper create-new-wrapper__editor"
+      *ngIf="editMode"
+      [ngStyle]="{
+        'background-color': inputFocused ? 'white' : ''
+      }"
+      class="create-new-wrapper__editor"
     >
       <app-colour-picker-mat-select
         (onPickColour)="newOptionData.Colour = $event"
-        [(panelOpened)]="panelOpened"
       ></app-colour-picker-mat-select>
       <input
         placeholder="Enter an option"
@@ -35,10 +37,14 @@
 <div class="create-new-wrapper">
   <span
     role="button"
-    class="option-wrapper create-new-wrapper__toggle"
+    class="create-new-wrapper__toggle"
     (click)="onToggleEditMode()"
   >
-    <mat-icon>{{ !editMode ? "edit" : "close" }}</mat-icon>
+    <!-- <mat-icon >{{
+      !editMode ? "edit" : "backspace"
+    }}</mat-icon> -->
+    <mat-icon>edit</mat-icon>
+
     <span>{{ !editMode ? "Edit options" : "Cancel" }}</span>
   </span>
 </div>

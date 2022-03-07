@@ -10,22 +10,26 @@
     disableRipple
   >
     <mat-select-trigger>
-      <div
-        [class.priority-select-indicator]="controlName === 'priority'"
-        [ngStyle]="{ 'background-color': selectedItem.Colour }"
-      ></div>
-      <!---*overflow hidden text-->
-      <span
-        [class.margin-left]="controlName !== 'priority'"
-        [class]="
-          controlName === 'status' ? 'status-tag status-tag--selected' : ''
-        "
-        [ngStyle]="{
-          'background-color':
-            controlName !== 'priority' ? selectedItem.Colour : ''
-        }"
-        >{{ selectedItem.Text }}</span
-      >
+      <div class="option-wrapper">
+        <span>
+          <div
+            [class.priority-select-indicator]="controlName === 'priority'"
+            [ngStyle]="{ 'background-color': selectedItem.Colour }"
+          ></div>
+        </span>
+        <!---*overflow hidden text-->
+        <span
+          [class.margin-left]="controlName !== 'priority'"
+          [class]="
+            controlName === 'status' ? 'status-tag status-tag--selected' : ''
+          "
+          [ngStyle]="{
+            'background-color':
+              controlName !== 'priority' ? selectedItem.Colour : ''
+          }"
+          >{{ selectedItem.Text }}</span
+        >
+      </div>
     </mat-select-trigger>
 
     <app-drop-down-list-edit
@@ -50,7 +54,7 @@
           <mat-icon
             *ngIf="item.Value > 3 && editMode"
             (click)="onDeleteOption(item.Value)"
-            >close</mat-icon
+            >delete_forever</mat-icon
           >
         </div>
       </mat-option>

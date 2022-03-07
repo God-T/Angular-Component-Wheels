@@ -4,7 +4,6 @@
     panelClass="colour-picker-panel"
     [(ngModel)]="colourPicked"
     (selectionChange)="onSelectionChange($event.value)"
-    (openedChange)="(matSelect.panelOpen)"
     disableOptionCentering
   >
     <mat-select-trigger [ngStyle]="{ color: colourPicked }">

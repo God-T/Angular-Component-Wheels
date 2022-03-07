@@ -22,12 +22,11 @@ export class DropDownListEditComponent {
 
   _editMode: boolean = false;
   _optionList: SelectListItemWithColour[] = [];
-
   activeScrollbar: boolean = true;
   inputFocused: boolean = false;
-  controlName = 'priority';
   autoFocusInputFieldTriggered: boolean = false;
   autoScrollToBottomTriggered: boolean = false;
+  controlName = 'priority';
   newOptionData: SelectListItemWithColour = {
     Colour: '',
     Text: '',
@@ -35,7 +34,6 @@ export class DropDownListEditComponent {
   };
 
   set editMode(value: boolean) {
-    console.log('emit', value);
     this._editMode = value;
     this.editModeChange.emit(this._editMode);
   }

@@ -3,6 +3,9 @@
 $panel-width: 230px;
 $option-height: 48px;
 $content-line-height: calc(#{$option-height} - 23px);
+$option-padding-inline: 10px;
+$option-indicator-width: 24px;
+$option-flex-gap: 13px;
 
 @mixin centered-hori-and-vert {
   display: flex;
@@ -17,6 +20,35 @@ $content-line-height: calc(#{$option-height} - 23px);
 
 .mat-option.mat-option-disabled {
   color: black;
+}
+
+.option-wrapper {
+  @include centered-hori-and-vert;
+  height: $option-height;
+  gap: $option-flex-gap;
+  padding-inline: $option-padding-inline;
+
+  & > :nth-child(1) {
+    @include centered-hori-and-vert;
+    flex: 0 0 $option-indicator-width;
+  }
+  & > :nth-child(2) {
+    flex: 1 0 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 100%;
+  }
+  & > :nth-child(3) {
+    flex: 0 0 $option-indicator-width;
+    color: gray;
+    cursor: pointer;
+    margin-right: 0;
+
+    &:hover {
+      color: red;
+    }
+  }
 }
 
 ::ng-deep .cdk-overlay-container .cdk-overlay-pane .priority-select-panel {
