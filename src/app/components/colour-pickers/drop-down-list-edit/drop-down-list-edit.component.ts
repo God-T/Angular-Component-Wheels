@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SelectListItemWithColour } from '../models/select-list-item';
+import { SelectListItemWithColour } from '../../../models/select-list-item';
 
 @Component({
   selector: 'app-drop-down-list-edit',
@@ -28,7 +28,7 @@ export class DropDownListEditComponent {
   autoScrollToBottomTriggered: boolean = false;
   controlName = 'priority';
   newOptionData: SelectListItemWithColour = {
-    Colour: '',
+    Colour: '#f06a6a',
     Text: '',
     Value: -1,
   };
@@ -55,7 +55,11 @@ export class DropDownListEditComponent {
 
   resetEditOptionStatus() {
     this.editMode = false;
-    this.newOptionData = { Colour: '', Text: '', Value: -1 };
+    this.newOptionData = {
+      Colour: '#f06a6a',
+      Text: '',
+      Value: -1,
+    };
   }
 
   onCreateNewOption() {
@@ -63,6 +67,7 @@ export class DropDownListEditComponent {
     if (!!this.newOptionData.Colour && !!this.newOptionData.Text) {
       this.optionList.push({
         Colour: this.newOptionData.Colour,
+        Text: this.newOptionData.Text,
         Value:
           Math.max.apply(
             Math,
@@ -70,9 +75,12 @@ export class DropDownListEditComponent {
               return item.Value;
             })
           ) + 1,
-        Text: this.newOptionData.Text,
       });
-      this.newOptionData.Text = '';
+      this.newOptionData = {
+        Colour: '#f06a6a',
+        Text: '',
+        Value: -1,
+      };
 
       this.autoFocusInputFieldTriggered = true;
       this.autoScrollToBottomTriggered = true;

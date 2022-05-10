@@ -9,21 +9,27 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { ColourPickerMatSelectComponent } from './colour-picker-mat-select/colour-picker-mat-select.component';
-import { ColourPickerComponent } from './colour-picker-overlay/colour-picker.component';
 import { MatDividerModule } from '@angular/material/divider';
-import { DragDropComponent } from './drag-drop/drag-drop/drag-drop.component';
+import { DragDropComponent } from './components/drag-drop/drag-drop.component';
 import { AutoScrollToBottomDirective } from './directives/auto-scroll-to-bottom.directive';
 import { AutoFocusInputFieldDirective } from './directives/auto-focus-input-field.directive';
-import { PrioritySelectComponent } from './priority-select--pure/priority-select.component';
-import { DropDownListEditComponent } from './drop-down-list-edit/drop-down-list-edit.component';
+import { ColourPickerComponent } from './components/colour-pickers/colour-picker-mat-menu/colour-picker.component';
+import { ColourPickerMatSelectComponent } from './components/colour-pickers/colour-picker-mat-select/colour-picker-mat-select.component';
+import { PrioritySelectComponent } from './components/colour-pickers/priority-select--pure/priority-select.component';
+import { DropDownListEditComponent } from './components/colour-pickers/drop-down-list-edit/drop-down-list-edit.component';
+import { AutoSaveComponent } from './components/auto-save/auto-save.component';
+import { AutoSaveDriverComponent } from './components/auto-save/auto-save-driver/auto-save-driver.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const baseComponents = [
   ColourPickerComponent,
   ColourPickerMatSelectComponent,
   PrioritySelectComponent,
-  DragDropComponent,
   DropDownListEditComponent,
+  AutoSaveComponent,
+  AutoSaveDriverComponent,
+  DragDropComponent,
 ];
 
 const baseDirectives = [
@@ -41,6 +47,8 @@ const UIModule = [
   MatGridListModule,
   MatDividerModule,
   DragDropModule,
+  MatProgressSpinnerModule,
+  MatSnackBarModule,
 ];
 
 @NgModule({

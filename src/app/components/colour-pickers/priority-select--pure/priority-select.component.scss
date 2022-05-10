@@ -1,12 +1,15 @@
-@use "../styles/scrollbar.scss";
-
+@use "../../../styles/scrollbar.scss";
+/////////////////////////// Adjustable
 $panel-width: 230px;
+$panel-margin-top: 50px;
+$panel-margin-left: 17px;
 $option-height: 48px;
-$content-line-height: calc(#{$option-height} - 23px);
+$content-line-height: 25px;
 $option-padding-inline: 10px;
 $option-indicator-width: 24px;
 $option-flex-gap: 13px;
 
+////////////////////////////
 @mixin centered-hori-and-vert {
   display: flex;
   align-items: center;
@@ -51,6 +54,31 @@ $option-flex-gap: 13px;
   }
 }
 
+.selected-option-wrapper {
+  @include centered-hori-and-vert;
+  width: $panel-width;
+  gap: 10px;
+
+  & > :nth-child(1) {
+    @include centered-hori-and-vert;
+    padding-bottom: 1px;
+    flex: 0 0 $option-indicator-width;
+    margin-left: $option-padding-inline;
+  }
+  & > :nth-child(2) {
+    flex: 1 0 1px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 100%;
+    margin-right: 20px;
+  }
+}
+
+:host ::ng-deep .mat-select-placeholder {
+  padding-left: 20px;
+}
+
 ::ng-deep .cdk-overlay-container .cdk-overlay-pane .priority-select-panel {
   min-width: 0 !important;
   min-height: 0 !important;
@@ -58,8 +86,8 @@ $option-flex-gap: 13px;
   max-height: none;
   overflow-x: hidden;
   width: $panel-width;
-  margin-top: 35px;
-  margin-left: 8px;
+  margin-top: $panel-margin-top; // Adjustable
+  margin-left: $panel-margin-left; // Adjustable
 
   // [[[[[ use our scrollbar design, * need to make it work in our code base
   &::-webkit-scrollbar {

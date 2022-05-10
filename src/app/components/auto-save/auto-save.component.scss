@@ -1,0 +1,51 @@
+@use "../../styles/utils.scss";
+
+@mixin flex-layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+:host ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: #277f89;
+}
+
+.save-indicator {
+  @include flex-layout;
+  height: 32px;
+  width: 120px;
+  margin-right: 10px !important;
+
+  &__saved-icon,
+  &__saving-spinner {
+    align-self: center;
+    color: #277f89;
+  }
+
+  &__saved-icon {
+    height: 24px;
+    width: 24px;
+  }
+
+  &__text {
+    font-size: 18px;
+    font-style: 0.5px;
+    color: #277f89;
+    letter-spacing: normal;
+    align-self: center;
+    font-weight: 600 !important;
+    margin-right: 15px;
+
+    &--saving::after {
+      content: "...";
+    }
+  }
+}
+
+::ng-deep .auto-save-snackbar {
+  background-color: #277f89;
+  color: white;
+  min-width: 0 !important;
+}

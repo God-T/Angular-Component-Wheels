@@ -13,9 +13,14 @@ import {
   styleUrls: ['./colour-picker-mat-select.component.scss'],
 })
 export class ColourPickerMatSelectComponent implements OnInit {
-  @Output('onPickColour') onPickColourEvent = new EventEmitter<string>();
+  @Input()
+  get colourPicked(): string {
+    return this._colourPicked;
+  }
 
-  colourPicked: string = '#f06a6a';
+  @Output() colourPickedChange = new EventEmitter<string>();
+
+  _colourPicked: string = '#f06a6a';
   colourValueList = [
     '#f06a6a',
     '#ec8d71',
@@ -35,12 +40,17 @@ export class ColourPickerMatSelectComponent implements OnInit {
     '#6d6e6f',
   ];
 
+  set colourPicked(value: string) {
+    this._colourPicked = value;
+    this.colourPickedChange.emit(this._colourPicked);
+  }
+
   ngOnInit() {
     this.onSelectionChange(this.colourPicked); // Worked
   }
 
-  onSelectionChange(_colourPicked: string) {
-    this.onPickColourEvent.emit(_colourPicked);
+  onSelectionChange(value: string) {
+    this.colourPicked = value;
   }
 
   pickContentColourBasedOnBgColour(bgColour: string): string {

@@ -9,7 +9,7 @@ import {
   trigger,
 } from '@angular/animations';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { SelectListItemWithColour } from '../models/select-list-item';
+import { SelectListItemWithColour } from '../../../models/select-list-item';
 
 @Component({
   selector: 'app-priority-select',

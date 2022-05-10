@@ -17,11 +17,7 @@
     <div>
       [PlaceHolder]
       <div>
-        <app-colour-picker-mat-select (onPickColour)="colourPicked = $event">
-          <div class="colour-picker-selected">
-            <div [ngStyle]="{ 'background-color': colourPicked }"></div>
-            {{ fieldName }}
-          </div>
+        <app-colour-picker-mat-select [(colourPicked)]="colourPicked">
         </app-colour-picker-mat-select>
       </div>
       [PlaceHolder]
@@ -33,5 +29,6 @@
     </div>
     ==================================================================================
     <!-- <app-drag-drop></app-drag-drop> -->
+    <app-auto-save-driver></app-auto-save-driver>
   </div>
 </div>

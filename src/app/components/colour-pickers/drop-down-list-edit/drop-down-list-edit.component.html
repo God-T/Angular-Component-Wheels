@@ -6,16 +6,19 @@
 >
   <ng-content></ng-content>
 
-  <div *ngIf="editMode" class="create-new-wrapper">
+  <div
+    *ngIf="editMode"
+    class="create-new-wrapper"
+    (click)="$event.stopPropagation()"
+  >
     <div
-      *ngIf="editMode"
       [ngStyle]="{
         'background-color': inputFocused ? 'white' : ''
       }"
       class="create-new-wrapper__editor"
     >
       <app-colour-picker-mat-select
-        (onPickColour)="newOptionData.Colour = $event"
+        [(colourPicked)]="newOptionData.Colour"
       ></app-colour-picker-mat-select>
       <input
         placeholder="Enter an option"
@@ -26,6 +29,7 @@
         (focus)="inputFocused = true"
         (focusout)="inputFocused = false"
         appAutoFocusInputField
+        maxlength="50"
       />
       <mat-icon (click)="onCreateNewOption()">check</mat-icon>
     </div>
@@ -40,11 +44,7 @@
     class="create-new-wrapper__toggle"
     (click)="onToggleEditMode()"
   >
-    <!-- <mat-icon >{{
-      !editMode ? "edit" : "backspace"
-    }}</mat-icon> -->
     <mat-icon>edit</mat-icon>
-
     <span>{{ !editMode ? "Edit options" : "Cancel" }}</span>
   </span>
 </div>

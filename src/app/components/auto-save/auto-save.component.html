@@ -1,0 +1,19 @@
+<div
+  class="save-indicator"
+  *ngIf="
+    !haveAllSavingsCompleted || currentStatus === autoSaveStatusEnum.Saving
+  "
+>
+  <mat-spinner
+    class="save-indicator__saving-spinner"
+    diameter="24"
+  ></mat-spinner>
+  <span class="save-indicator__text save-indicator__text--saving">Saving</span>
+</div>
+<div
+  class="save-indicator"
+  *ngIf="haveAllSavingsCompleted && currentStatus === autoSaveStatusEnum.Saved"
+>
+  <mat-icon class="save-indicator__saved-icon">cloud_done</mat-icon>
+  <span class="save-indicator__text">Saved</span>
+</div>
