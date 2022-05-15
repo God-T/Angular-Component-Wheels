@@ -19,8 +19,12 @@ import { PrioritySelectComponent } from './components/colour-pickers/priority-se
 import { DropDownListEditComponent } from './components/colour-pickers/drop-down-list-edit/drop-down-list-edit.component';
 import { AutoSaveComponent } from './components/auto-save/auto-save.component';
 import { AutoSaveDriverComponent } from './components/auto-save/auto-save-driver/auto-save-driver.component';
+import { RxjsSandboxIndexComponent } from './components/rxjs-sandbox/rxjs-sandbox-index.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 const baseComponents = [
   ColourPickerComponent,
@@ -30,6 +34,7 @@ const baseComponents = [
   AutoSaveComponent,
   AutoSaveDriverComponent,
   DragDropComponent,
+  RxjsSandboxIndexComponent,
 ];
 
 const baseDirectives = [
@@ -49,6 +54,9 @@ const UIModule = [
   DragDropModule,
   MatProgressSpinnerModule,
   MatSnackBarModule,
+  MatSliderModule,
+  MatFormFieldModule,
+  MatInputModule,
 ];
 
 @NgModule({

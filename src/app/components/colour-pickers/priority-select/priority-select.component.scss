@@ -50,7 +50,7 @@ $base-option-indicator-width: 24px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    line-height: 100%;
+    line-height: inherit;
   }
 
   &--deleteable {

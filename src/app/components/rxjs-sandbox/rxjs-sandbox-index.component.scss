@@ -1,0 +1,42 @@
+.basic {
+  display: flex;
+  margin-top: 25px;
+  gap: 10px;
+
+  :first-child {
+    width: 150px;
+  }
+  :last-child {
+    width: 100px;
+  }
+}
+
+.body {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  :first-child,
+  :last-child {
+    display: flex;
+    gap: 20px;
+    :first-child {
+      align-self: center;
+    }
+    :last-child {
+      width: 300px;
+    }
+  }
+}
+
+:host ::ng-deep .mat-slider-wrapper {
+  .mat-slider-thumb-container {
+    .mat-slider-thumb-label {
+      width: 43px;
+      height: 43px;
+      top: -55px;
+      right: -22px;
+    }
+  }
+}

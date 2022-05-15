@@ -23,6 +23,6 @@ export class AutoSaveDriverComponent implements OnInit {
     this.autoSaveStatusUpdating.next(EnumAutoSaveStatus.Saving);
     setTimeout(() => {
       this.autoSaveStatusUpdating.next(EnumAutoSaveStatus.Saved);
-    }, 4000); // Faking the saving time with 4s
+    }, 2000); // Faking the saving time with 2s
   }
 }

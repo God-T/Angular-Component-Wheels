@@ -1,0 +1,34 @@
+<div class="basic">
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="input.name" />
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Age</mat-label>
+    <input min="0" type="number" matInput [(ngModel)]="input.age" />
+  </mat-form-field>
+</div>
+
+<div class="body">
+  <div>
+    <span>Height:</span>
+    <mat-slider
+      thumbLabel
+      max="200"
+      min="140"
+      [displayWith]="formatHeightLabel"
+      [ngModel]="slider.height"
+      (ngModelChange)="handleSliderChange($event)"
+    ></mat-slider>
+  </div>
+  <div>
+    <span>Weight:</span>
+    <mat-slider
+      thumbLabel
+      max="100"
+      min="30"
+      [displayWith]="formatWeightLabel"
+      [(ngModel)]="slider.weight"
+    ></mat-slider>
+  </div>
+</div>
