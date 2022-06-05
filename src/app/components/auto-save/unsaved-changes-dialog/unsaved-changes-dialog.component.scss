@@ -1,0 +1,33 @@
+.dialog-content-wrpper {
+  height: 30px;
+}
+
+.leave-btn {
+  color: white;
+  background-color: #277f89;
+}
+
+.cancel-btn {
+  color: rgb(105, 105, 105);
+}
+
+:host ::ng-deep .mat-progress-spinner circle,
+.mat-spinner circle {
+  stroke: rgb(105, 105, 105);
+}
+
+.save-indicator__saved-icon {
+  color: rgb(141, 141, 141);
+}
+
+.dialog-content {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.dialog-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}

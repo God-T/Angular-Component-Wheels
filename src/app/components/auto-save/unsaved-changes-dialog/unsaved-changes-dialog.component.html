@@ -1,0 +1,31 @@
+<h1 mat-dialog-title>Are you sure you want to leave this page?</h1>
+<div class="dialog-content-wrpper">
+  <div mat-dialog-content *ngIf="isSaving()" class="dialog-content">
+    <mat-spinner
+      class="save-indicator__saving-spinner"
+      diameter="24"
+    ></mat-spinner>
+    Your changes are being saving ...
+  </div>
+  <div mat-dialog-content *ngIf="!isSaving()" class="dialog-content">
+    <mat-icon class="save-indicator__saved-icon">cloud_done</mat-icon>
+    Your changes has been saved.
+  </div>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+  <button mat-button (click)="onNoClick()" class="cancel-btn">
+    {{ isSaving() ? "Stay on this Page" : "Cancel" }}
+  </button>
+  <button
+    mat-flat-button
+    cdkFocusInitial
+    class="leave-btn"
+    [matTooltip]="
+      isSaving()
+        ? 'Your changes may not be saved'
+        : 'You are safe to leave this page'
+    "
+  >
+    {{ isSaving() ? "Leave Anyway" : "Leave this Page" }}
+  </button>
+</div>

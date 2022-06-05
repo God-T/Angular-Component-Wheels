@@ -25,6 +25,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { UnsavedChangesDialogComponent } from './components/auto-save/unsaved-changes-dialog/unsaved-changes-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const baseComponents = [
   ColourPickerComponent,
@@ -35,6 +39,7 @@ const baseComponents = [
   AutoSaveDriverComponent,
   DragDropComponent,
   RxjsSandboxIndexComponent,
+  UnsavedChangesDialogComponent,
 ];
 
 const baseDirectives = [
@@ -48,6 +53,7 @@ const UIModule = [
   BrowserAnimationsModule,
   MatMenuModule,
   MatSelectModule,
+  MatButtonModule,
   MatIconModule,
   MatGridListModule,
   MatDividerModule,
@@ -57,6 +63,8 @@ const UIModule = [
   MatSliderModule,
   MatFormFieldModule,
   MatInputModule,
+  MatDialogModule,
+  MatTooltipModule,
 ];
 
 @NgModule({
