@@ -1,11 +1,16 @@
 <div class="basic">
   <mat-form-field appearance="fill">
     <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="input.name" />
+    <input matInput [(ngModel)]="nestingInput.input.name" />
   </mat-form-field>
   <mat-form-field appearance="fill">
     <mat-label>Age</mat-label>
-    <input min="0" type="number" matInput [(ngModel)]="input.age" />
+    <input
+      min="0"
+      type="number"
+      matInput
+      [(ngModel)]="nestingInput.input.age"
+    />
   </mat-form-field>
 </div>
 
@@ -18,7 +23,7 @@
       min="140"
       [displayWith]="formatHeightLabel"
       [ngModel]="slider.height"
-      (ngModelChange)="handleSliderChange($event)"
+      (ngModelChange)="handleHeightChange($event)"
     ></mat-slider>
   </div>
   <div>

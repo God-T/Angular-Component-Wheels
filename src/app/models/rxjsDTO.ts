@@ -1,8 +1,18 @@
-export class RxjsSlider {
-  constructor(public height: number, public weight: number) {}
+export class SliderDTO {
+  constructor(_height: number, _weight: number) {
+    this.height = _height;
+    this.weight = _weight;
+  }
+
+  height: number;
+  weight: number;
 }
 
-export class RxjsInput {
+export class InputDTO {
   name: string;
   age: number;
+}
+
+export class NestingInputDTO {
+  input: InputDTO;
 }

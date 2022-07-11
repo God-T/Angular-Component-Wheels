@@ -1,7 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  KeyValueDiffer,
+  KeyValueDiffers,
+  OnInit,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
-import { RxjsInput, RxjsSlider } from './../../models/rxjsDTO';
+import { InputDTO, NestingInputDTO, SliderDTO } from './../../models/rxjsDTO';
 
 @Component({
   selector: 'app-rxjs-sandbox-index',
@@ -9,37 +13,78 @@ import { RxjsInput, RxjsSlider } from './../../models/rxjsDTO';
   styleUrls: ['./rxjs-sandbox-index.component.scss'],
 })
 export class RxjsSandboxIndexComponent implements OnInit {
-  @Input() give: number;
-  inputSubject: BehaviorSubject<RxjsInput>;
-  sliderSubject: BehaviorSubject<RxjsSlider>;
+  sliderSubject: BehaviorSubject<SliderDTO>;
 
-  get input(): RxjsInput {
-    return this.inputSubject.getValue();
-  }
-  set input(value: RxjsInput) {
-    this.inputSubject.next(value);
-  }
+  differ: KeyValueDiffer<string, any>;
+  input: InputDTO;
+  nestingInput: NestingInputDTO;
 
-  get slider(): RxjsSlider {
+  get slider(): SliderDTO {
     return this.sliderSubject.getValue();
   }
-  set slider(value: RxjsSlider) {
+  set slider(value: SliderDTO) {
     this.sliderSubject.next(value);
   }
 
   formatHeightLabel = (value: number) => value + 'cm';
   formatWeightLabel = (value: number) => value + 'kg';
 
-  ngOnInit(): void {
-    this.inputSubject = new BehaviorSubject<RxjsInput>(new RxjsInput());
-    this.sliderSubject = new BehaviorSubject<RxjsSlider>(
-      new RxjsSlider(178, 65)
-    );
+  constructor(private differs: KeyValueDiffers) {}
 
+  ngOnInit(): void {
+    this.sliderSubject = new BehaviorSubject<SliderDTO>(new SliderDTO(178, 65));
     this.sliderSubject.subscribe(console.log);
+
+    this.input = new InputDTO();
+    this.differ = this.differs.find(this.input).create();
+
+    this.nestingInput = new NestingInputDTO();
+    this.nestingInput.input = new InputDTO();
+    this.differ = this.differs.find(this.nestingInput).create();
   }
 
-  handleSliderChange(change: number) {
-    this.slider = new RxjsSlider(change, 65);
+  ngDoCheck(): void {
+    const changes = this.differ.diff(this.nestingInput);
+    console.log(changes);
+    if (changes) {
+      console.log('changes');
+    }
+  }
+
+  handleHeightChange(change: number) {
+    this.slider = new SliderDTO(change, 65);
   }
 }
+
+// ngAfterViewInit() {
+//   console.log('ngAfterViewInit');
+// const autoSaveDebouncing = (next: QueryList<ElementRef>) => {
+//   // Debouncing with 0.5 sec
+//   if (!next.first) return;
+//   console.log('binding');
+//   this.stkFormRef.first.valueChanges
+//     .pipe(
+//       distinctUntilChanged(
+//         (a, b) => JSON.stringify(a) === JSON.stringify(b)
+//       )
+//     )
+//     .subscribe(() => {
+//       console.log('form value changed', this.stakeholder);
+//     });
+// };
+// this.stkFormRef.changes.subscribe(autoSaveDebouncing);
+// }
+
+// @ViewChildren('stkFormRef', { read: ElementRef })
+// stkFormRef: QueryList<ElementRef>;
+
+// ngAfterViewInit() {
+//   console.log('ngAfterViewInit');
+//   const autoSaveDebouncing = () => {
+//     this.stkForm.valueChanges.subscribe((selectedValue) => {
+//       console.log('form value changed');
+//       console.log(selectedValue);
+//     });
+//   };
+//   this.stkFormRef.changes.subscribe(autoSaveDebouncing);
+// }

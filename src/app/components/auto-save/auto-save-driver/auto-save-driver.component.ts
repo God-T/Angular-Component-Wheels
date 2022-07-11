@@ -43,3 +43,25 @@ export class AutoSaveDriverComponent implements OnInit {
     }, 5000); // Faking the saving time with 5s
   }
 }
+
+// private checkActivitiesAlreadyLinkedOrUnlinked(
+//   activities: ActivityDTO[],
+//   isLinked: boolean
+// ): boolean {
+//   const names: string[] = [];
+//   activities.map((a) => {
+//     const found = this.stakeholder.StakeholderActivities.find(
+//       (_a) => _a.LinkID === a.LinkID
+//     );
+//     if (!found) return;
+//     names.push(found.MethodName);
+//   });
+//   if (names.length === 0) return false;
+//   const nameToSting = names.join(' ,');
+//   const msg =
+//     $localize`Activities ` + nameToSting + isLinked
+//       ? $localize` already linked`
+//       : $localize` already unlinked`;
+//   this.openSnackBar(msg);
+//   return true;
+// }
